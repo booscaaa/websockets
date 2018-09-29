@@ -13,15 +13,10 @@ type Msg struct {
 	Room string `json:"room, omitempty"`
 }
 
-//Custom server which basically only contains a socketio variable
-//But we need it to enhance it with functions
 type customServer struct {
 	Server *socketio.Server
 }
 
-//Header handling, this is necessary to adjust security and/or header settings in general
-//Please keep in mind to adjust that later on in a productive environment!
-//Access-Control-Allow-Origin will be set to whoever will call the server
 func (s *customServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Credentials", "true")
 	origin := r.Header.Get("Origin")
@@ -30,14 +25,12 @@ func (s *customServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	//get/configure socket.io websocket for clients
 	ioServer := configureSocketIO()
 
 	wsServer := new(customServer)
 	wsServer.Server = ioServer
 
-	//HTTP settings
-	println("Core Service is listening on port 8081...")
+	println("Core Service is listening on port 5000...")
 	http.Handle("/socket.io/", wsServer)
 	http.ListenAndServe(":5000", nil)
 }
@@ -48,7 +41,6 @@ func configureSocketIO() *socketio.Server {
 		log.Fatal(err)
 	}
 
-	//Client connects to server
 	server.On("connection", func(so socketio.Socket) {
 
 		log.Println("on connection")
@@ -58,13 +50,13 @@ func configureSocketIO() *socketio.Server {
 		})
 
 		so.On("message", func(msg string) {
-			log.Println(msg)
 			msgS := Msg{}
 			err := json.Unmarshal([]byte(msg), &msgS)
 			if err == nil {
 					log.Println(msgS.Room)
 			}
-			so.BroadcastTo(msgS.Room, "message", msgS.Msg)
+			
+			so.BroadcastTo(msgS.Room, "message", msgS)
 		})
 
 		so.On("disconnection", func() {

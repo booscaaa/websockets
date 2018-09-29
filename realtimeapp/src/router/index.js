@@ -1,26 +1,27 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Chat from '@/components/Chat'
-import Start from '@/components/Start'
+import CardsControl from '@/components/CardsControl'
+import Control from '@/components/Control'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+
+Vue.use(Vuetify)
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'Chat',
-      component: Chat
+      name: 'CardsControl',
+      component: CardsControl
     },
     {
-      path: '/chat-maquina-um',
-      name: 'Chat',
-      component: Chat
-    },
-    {
-      path: '/start',
-      name: 'Start',
-      component: Start
+      path: '/controle',
+      name: 'Control',
+      component: Control
     }
   ]
 })
