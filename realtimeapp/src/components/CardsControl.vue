@@ -74,6 +74,7 @@ export default {
     msg1: 'Aguardando...',
     isStart: true,
     socket: io('http://192.168.200.88:5000'),
+    // socket: io('https://websocketservice.vinicius.rs/socket.io/'),
     top: '15',
     top1: '15'
   }),

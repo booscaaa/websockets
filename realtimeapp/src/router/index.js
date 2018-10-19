@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import CardsControl from '@/components/CardsControl'
 import Control from '@/components/Control'
+import MobileControl from '@/components/MobileControl'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
@@ -22,6 +23,11 @@ export default new Router({
       path: '/controle',
       name: 'Control',
       component: Control
+    },
+    {
+      path: '/mobile',
+      name: 'Control',
+      component: MobileControl
     }
   ]
 })

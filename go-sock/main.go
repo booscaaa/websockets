@@ -11,6 +11,9 @@ import (
 type Msg struct {
 	Msg  string `json:"msg, omitempty"`
 	Room string `json:"room, omitempty"`
+	Red int `json:"red, omitempty"`
+	Green int `json:"green, omitempty"`
+	Blue int `json:"blue, omitempty"`
 }
 
 type customServer struct {
@@ -55,7 +58,7 @@ func configureSocketIO() *socketio.Server {
 			if err == nil {
 					log.Println(msgS.Room)
 			}
-			
+			log.Println(msg)
 			so.BroadcastTo(msgS.Room, "message", msgS)
 		})
 

@@ -41,6 +41,7 @@ export default {
   name: 'Control',
   data: () => ({
     socket: io('http://192.168.200.88:5000'),
+    // socket: io('http://localhost:5000/socket.io/'),
     slider: 45,
     interval: null,
     val: 0,
