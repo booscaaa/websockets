@@ -1,43 +1,48 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
-	"encoding/json"
 
 	"github.com/googollee/go-socket.io"
 )
 
+// Msg é a definição da estrutura de mensagem que iremos passar em ambos os lados da aplicação
 type Msg struct {
-	Msg  string `json:"msg, omitempty"`
-	Room string `json:"room, omitempty"`
-	Red int `json:"red, omitempty"`
-	Green int `json:"green, omitempty"`
-	Blue int `json:"blue, omitempty"`
+	Msg   string `json:"msg, omitempty"`
+	Room  string `json:"room, omitempty"`
+	Red   int    `json:"red, omitempty"`
+	Green int    `json:"green, omitempty"`
+	Blue  int    `json:"blue, omitempty"`
 }
 
-type customServer struct {
+// CustomServer irá ser utilizado para facilitar a alteração do CORS do serviço
+type CustomServer struct {
 	Server *socketio.Server
 }
 
-func (s *customServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+// ServeHTTP é a funcção que irá substituir o CORS default do serviço
+func (s *CustomServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Credentials", "true")
 	origin := r.Header.Get("Origin")
 	w.Header().Set("Access-Control-Allow-Origin", origin)
 	s.Server.ServeHTTP(w, r)
 }
 
+// main é onde a aplicação é executada, é a primeira função que é chamada ao executar o arquivo main.go
 func main() {
 	ioServer := configureSocketIO()
 
-	wsServer := new(customServer)
+	wsServer := new(CustomServer)
 	wsServer.Server = ioServer
 
-	println("Core Service is listening on port 5000...")
+	println("Serviço sendo escutado na porta 5000...")
 	http.Handle("/socket.io/", wsServer)
 	http.ListenAndServe(":5000", nil)
 }
 
+// configureSocketIO é onde definimos os métodos do web socket, como connection por exemplo
 func configureSocketIO() *socketio.Server {
 	server, err := socketio.NewServer(nil)
 	if err != nil {
@@ -56,7 +61,7 @@ func configureSocketIO() *socketio.Server {
 			msgS := Msg{}
 			err := json.Unmarshal([]byte(msg), &msgS)
 			if err == nil {
-					log.Println(msgS.Room)
+				log.Println(msgS.Room)
 			}
 			log.Println(msg)
 			so.BroadcastTo(msgS.Room, "message", msgS)

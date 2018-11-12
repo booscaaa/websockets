@@ -1,78 +1,46 @@
 <template>
-  <v-app>
-  <v-card class="e4">
-    <v-responsive
-      :style="{ background: `rgb(${red}, ${green}, ${blue})` }"
-      height="300px"
-    ></v-responsive>
+<v-app>
+  <v-container>
+    <v-card class="e4">
+      <v-responsive :style="{ background: `rgb(${red}, ${green}, ${blue})` }" height="300px"></v-responsive>
+      <v-card-text>
+        <v-container fluid grid-list-lg>
+          <v-layout row wrap>
+            <v-flex xs9>
+              <v-slider v-model="red" :max="255" label="R"></v-slider>
+            </v-flex>
 
-    <v-card-text>
-      <v-container
-        fluid
-        grid-list-lg
-      >
-        <v-layout
-          row
-          wrap
-        >
-          <v-flex xs9>
-            <v-slider
-              v-model="red"
-              :max="255"
-              label="R"
-            ></v-slider>
-          </v-flex>
+            <v-flex xs3>
+              <v-text-field v-model="red" class="mt-0" type="number"></v-text-field>
+            </v-flex>
 
-          <v-flex xs3>
-            <v-text-field
-              v-model="red"
-              class="mt-0"
-              type="number"
-            ></v-text-field>
-          </v-flex>
+            <v-flex xs9>
+              <v-slider v-model="green" :max="255" label="G"></v-slider>
+            </v-flex>
 
-          <v-flex xs9>
-            <v-slider
-              v-model="green"
-              :max="255"
-              label="G"
-            ></v-slider>
-          </v-flex>
+            <v-flex xs3>
+              <v-text-field v-model="green" class="mt-0" type="number"></v-text-field>
+            </v-flex>
 
-          <v-flex xs3>
-            <v-text-field
-              v-model="green"
-              class="mt-0"
-              type="number"
-            ></v-text-field>
-          </v-flex>
+            <v-flex xs9>
+              <v-slider :max="255" v-model="blue" label="B"></v-slider>
+            </v-flex>
 
-          <v-flex xs9>
-            <v-slider
-              :max="255"
-              v-model="blue"
-              label="B"
-            ></v-slider>
-          </v-flex>
-
-          <v-flex xs3>
-            <v-text-field
-              v-model="blue"
-              class="mt-0"
-              type="number"
-            ></v-text-field>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-card-text>
-  </v-card>
-  <v-layout row wrap justify-center align-center>
-    <v-flex xs12 sm10 md8 lg5 xl4>
-      <v-btn @click="start" name="button">Show me the controls</v-btn>
-      <v-btn @click="hide" name="button">Hide the controls</v-btn>
-    </v-flex>
-  </v-layout>
-  </v-app>
+            <v-flex xs3>
+              <v-text-field v-model="blue" class="mt-0" type="number"></v-text-field>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-card-text>
+    </v-card>
+    <v-layout row wrap justify-center align-center>
+      <v-flex xs12 sm10 md8 lg5 xl4>
+        <v-btn @click="start" name="button">Show me the controls</v-btn>
+        <v-btn @click="hide" name="button">Hide the controls</v-btn>
+      </v-flex>
+    </v-layout>
+  </v-container>
+</v-app>
 </template>
 
 <script>
@@ -127,7 +95,7 @@ export default {
       return '#' + this.componentToHex(r) + this.componentToHex(g) + this.componentToHex(b)
     },
 
-    start (){
+    start () {
       let o = {
         'msg': 'controls',
         'room': 'mobileControl'

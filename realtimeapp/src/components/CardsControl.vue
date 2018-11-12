@@ -1,68 +1,50 @@
 <template>
-  <v-app id="chat1">
-    <v-container>
-      <v-layout row wrap justify-center>
-        <v-flex xs12 md6 lg4 xl3>
-            <v-layout row wrap justify-center>
-          <v-flex xs12 sm6>
-              <span class="text-xs-left">Altura do cartão é: {{ msg }}</span>
+<v-app id="chat1">
+  <v-container>
+    <v-layout row wrap justify-center>
+      <v-flex xs12 md6 lg4 xl3>
+        <v-layout row wrap justify-center>
+          <v-flex xs12 sm5>
+            <span class="text-xs-left">Altura do cartão é: {{ msg }}</span>
           </v-flex>
           <v-flex xs12 sm6 v-bind:style="{ marginTop: top + 'px' }">
             <v-card>
-              <v-img
-                src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
-                aspect-ratio="2.75"
-              ></v-img>
-
               <v-card-title primary-title>
                 <div>
-                  <h3 class="headline mb-0 text-xs-left">Kangaroo Valley Safari</h3>
-                  <div class="text-xs-left">Located two hours south of Sydney in the <br>Southern Highlands of New South Wales, ...</div>
+                  <h3 class="headline mb-0 text-xs-left">Primeiro card</h3>
+                  <div class="text-xs-left">Escutando na sala CHAT</div>
                 </div>
               </v-card-title>
-
-              <v-card-actions>
-                <v-btn flat color="orange">Share</v-btn>
-                <v-btn flat color="orange">Explore</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-flex>
-          </v-layout>
-        </v-flex>
-        <v-flex xs12 md6 lg4 xl3>
-          <v-layout row wrap justify-center>
-          <v-flex xs12 sm6>
-              <span class="text-xs-left">Altura do cartão é: {{ msg1 }}</span>
-          </v-flex>
-          <v-flex xs12 sm6 v-bind:style="{ marginTop: top1 + 'px' }">
-            <v-card>
-              <v-img
-                src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
-                aspect-ratio="2.75"
-              ></v-img>
-              <v-card-title primary-title>
-                <div>
-                  <h3 class="headline mb-0 text-xs-left">Kangaroo Valley Safari</h3>
-                  <div class="text-xs-left">Located two hours south of Sydney in the <br>Southern Highlands of New South Wales, ...</div>
-                </div>
-              </v-card-title>
-              <v-card-actions>
-                <v-btn flat color="orange">Share</v-btn>
-                <v-btn flat color="orange">Explore</v-btn>
-              </v-card-actions>
             </v-card>
           </v-flex>
         </v-layout>
-        </v-flex>
-      </v-layout>
-    </v-container>
-    <v-tooltip left>
-      <v-btn fab dark large color="purple" id="button" slot="activator" @click="controle">
-        <v-icon dark>videogame_asset</v-icon>
-      </v-btn>
-      <span>Acessar controle de cards</span>
-    </v-tooltip>
-  </v-app>
+      </v-flex>
+      <v-flex xs12 md6 lg4 xl3>
+        <v-layout row wrap justify-center>
+          <v-flex xs12 sm5>
+            <span class="text-xs-left">Altura do cartão é: {{ msg1 }}</span>
+          </v-flex>
+          <v-flex xs12 sm6 v-bind:style="{ marginTop: top1 + 'px' }">
+            <v-card>
+              <v-card-title primary-title>
+                <div>
+                  <h3 class="headline mb-0 text-xs-left">Segundo card</h3>
+                  <div class="text-xs-left">Escutando na sala CHAT1</div>
+                </div>
+              </v-card-title>
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-flex>
+    </v-layout>
+  </v-container>
+  <v-tooltip left>
+    <v-btn fab dark large color="purple" id="button" slot="activator" @click="controle">
+      <v-icon dark>videogame_asset</v-icon>
+    </v-btn>
+    <span>Acessar controle de cards</span>
+  </v-tooltip>
+</v-app>
 </template>
 
 <script>
@@ -73,8 +55,8 @@ export default {
     msg: 'Aguardando...',
     msg1: 'Aguardando...',
     isStart: true,
-    socket: io('http://192.168.200.88:5000'),
     // socket: io('https://websocketservice.vinicius.rs/socket.io/'),
+    socket: io('http://localhost:5000/socket.io/'),
     top: '15',
     top1: '15'
   }),

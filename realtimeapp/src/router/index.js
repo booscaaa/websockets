@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import CardsControl from '@/components/CardsControl'
 import Control from '@/components/Control'
+import Grafico from '@/components/Grafico'
 import MobileControl from '@/components/MobileControl'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
@@ -26,8 +27,13 @@ export default new Router({
     },
     {
       path: '/mobile',
-      name: 'Control',
+      name: 'Mobile',
       component: MobileControl
+    },
+    {
+      path: '/grafico',
+      name: 'Grafico',
+      component: Grafico
     }
   ]
 })

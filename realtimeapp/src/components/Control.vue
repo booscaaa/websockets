@@ -1,38 +1,38 @@
 <template>
-  <v-app id="app">
-    <v-container>
-      <v-layout row wrap justify-center align-center>
-        <v-flex xs12 sm10 md8 lg5 xl4>
-          <v-btn @click="start" name="button">START/RESTART</v-btn>
-          <v-btn @click="pause" name="button">PAUSE</v-btn>
-          <v-btn @click="resume" name="button">RESUME</v-btn>
-          <v-container fluid grid-list-lg>
-            <v-layout row wrap>
-              <v-flex xs12>
-                <v-subheader class="pl-0">Altura do card</v-subheader>
-                <v-slider color="primary" :max="500" :min="1" v-model="slider" thumb-label="always"></v-slider>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-flex>
-      </v-layout>
-      <v-layout row wrap justify-center align-center>
-        <v-flex xs12 sm10 md8 lg5 xl4>
-          <v-btn @click="start1" name="button">START/RESTART</v-btn>
-          <v-btn @click="pause1" name="button">PAUSE</v-btn>
-          <v-btn @click="resume1" name="button">RESUME</v-btn>
-          <v-container fluid grid-list-lg>
-            <v-layout row wrap>
-              <v-flex xs12>
-                <v-subheader class="pl-0">Altura do card</v-subheader>
-                <v-slider color="primary" :max="500" :min="1" v-model="slider1" thumb-label="always"></v-slider>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </v-app>
+<v-app id="app">
+  <v-container>
+    <v-layout row wrap justify-center align-center>
+      <v-flex xs12 sm10 md8 lg5 xl4>
+        <v-btn @click="start" name="button">START/RESTART</v-btn>
+        <v-btn @click="pause" name="button">PAUSE</v-btn>
+        <v-btn @click="resume" name="button">RESUME</v-btn>
+        <v-container fluid grid-list-lg>
+          <v-layout row wrap>
+            <v-flex xs12>
+              <v-subheader class="pl-0">Altura do card</v-subheader>
+              <v-slider color="primary" :max="500" :min="1" v-model="slider" thumb-label="always"></v-slider>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-flex>
+    </v-layout>
+    <v-layout row wrap justify-center align-center>
+      <v-flex xs12 sm10 md8 lg5 xl4>
+        <v-btn @click="start1" name="button">START/RESTART</v-btn>
+        <v-btn @click="pause1" name="button">PAUSE</v-btn>
+        <v-btn @click="resume1" name="button">RESUME</v-btn>
+        <v-container fluid grid-list-lg>
+          <v-layout row wrap>
+            <v-flex xs12>
+              <v-subheader class="pl-0">Altura do card</v-subheader>
+              <v-slider color="primary" :max="500" :min="1" v-model="slider1" thumb-label="always"></v-slider>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-flex>
+    </v-layout>
+  </v-container>
+</v-app>
 </template>
 
 <script>
@@ -40,8 +40,8 @@ import io from 'socket.io-client'
 export default {
   name: 'Control',
   data: () => ({
-    socket: io('http://192.168.200.88:5000'),
-    // socket: io('http://localhost:5000/socket.io/'),
+    // socket: io('https://websocketservice.vinicius.rs/socket.io/'),
+    socket: io('http://192.168.200.88:5000/socket.io/'),
     slider: 45,
     interval: null,
     val: 0,
@@ -139,7 +139,7 @@ export default {
       }, 2000)
 
       that.socket.on('message', function (val) {
-      // Connected, let's sign-up for to receive messages for this room
+        // Connected, let's sign-up for to receive messages for this room
         // document.getElementById('image').src = 'data:image/gif;base64,' + val
       })
     })
@@ -153,15 +153,17 @@ export default {
   width: 100%;
   height: 500px;
 
-  position:absolute; /*it can be fixed too*/
-  left:0; right:0;
-  top:0; bottom:0;
-  margin:auto;
+  position: absolute;
+  /*it can be fixed too*/
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
 
   /*this to solve 'the content will not be cut when the window is smaller than the content': */
-  max-width:100%;
-  max-height:100%;
-  overflow:auto;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
 }
-
 </style>
